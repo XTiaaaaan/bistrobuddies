@@ -21,21 +21,23 @@
     <!-- Body Section -->
     <ion-content class="menu-content">
       <ion-list class="menu-list" lines="none">
-        <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-          <ion-item
-            [class.selected]="selectedIndex === i"
-            routerDirection="root"
-            [routerLink]="[p.url]"
-            lines="none"
-            detail="false"
-          >
-            <span class="icon-badge">
-              <ion-icon aria-hidden="true" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-            </span>
-            <ion-label>{{ p.title }}</ion-label>
-            <ion-icon class="chevron" aria-hidden="true" ios="chevron-forward-outline" md="chevron-forward-sharp"></ion-icon>
-          </ion-item>
-        </ion-menu-toggle>
+        @for (p of appPages; track p.url; let i = $index) {
+          <ion-menu-toggle auto-hide="false">
+            <ion-item
+              [class.selected]="selectedIndex === i"
+              routerDirection="root"
+              [routerLink]="[p.url]"
+              lines="none"
+              detail="false"
+            >
+              <span class="icon-badge">
+                <ion-icon aria-hidden="true" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              </span>
+              <ion-label>{{ p.title }}</ion-label>
+              <ion-icon class="chevron" aria-hidden="true" ios="chevron-forward-outline" md="chevron-forward-sharp"></ion-icon>
+            </ion-item>
+          </ion-menu-toggle>
+        }
       </ion-list>
 
       <!-- Decorative Footer Graphic -->

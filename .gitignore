@@ -68,3 +68,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Third-party tool clones (nested repos, content managed upstream)
+/.opencode/plugins/superpowers/
+/.opencode/skills/ui-ux-pro-max-skill/
+/.opencode/gsd-core-next/

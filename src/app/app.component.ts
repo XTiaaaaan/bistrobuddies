@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   ActivatedRoute,
@@ -41,7 +40,6 @@ import {
   styleUrls: ['app.component.scss'],
   standalone: true,
   imports: [
-    NgFor,
     RouterLink,
     IonApp,
     IonMenu,
