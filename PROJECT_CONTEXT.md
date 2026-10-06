@@ -1,198 +1,373 @@
-# BistroBuddies --- Master OpenCode Plan
+# BistroBuddies Project Context
 
-Repository: https://github.com/XTiaaaaan/bistrobuddies
+## PROJECT IDENTITY
 
-Firebase Storage is NOT used. Firebase is used for Authentication and
-Firestore. Cloudinary is used for product images. Vercel hosts the web
-app and server-side API functions. PayMongo handles online payments.
+Project name: BistroBuddies
 
-## Non-negotiable
+Repository:
+https://github.com/XTiaaaaan/bistrobuddies
 
--   Extend the existing repository; never create a new Ionic/Angular
-    project.
--   Inspect before modifying.
--   Preserve existing pages, assets, branding, and working
-    functionality.
--   Do not initialize another Git repository.
--   Do not unnecessarily upgrade major dependencies.
--   Never expose PayMongo or Cloudinary secrets in frontend code,
-    GitHub, Firestore, or Capacitor.
--   Enforce security in Firebase rules/backend, not only in the UI.
--   Build/test after every group.
--   Implement only the assigned group, then stop.
+This is an EXISTING Ionic Angular project.
 
-## Architecture
+IMPORTANT:
+- Never recreate the project.
+- Never create a new Ionic/Angular project.
+- Never replace the repository with a template.
+- Never initialize another Git repository.
+- Preserve existing working code, branding, assets, pages and architecture.
+- Inspect existing code before modifying it.
+- Avoid unnecessary dependency upgrades.
 
-Customer Ionic Angular app -\> Firebase Auth + Firestore + Vercel API +
-Cloudinary CDN + PayMongo. Admin is part of the same application, with
-protected admin routes. Firebase Storage is completely excluded.
+## MAIN GOAL
 
-## Manual setup order
+Turn the existing BistroBuddies application into a functional coffee ecommerce system.
 
-1.  Clone repository and run the existing app.
-2.  Make a backup branch.
-3.  Create/use the Firebase project and existing web app.
-4.  Enable Email/Password and Google Authentication.
-5.  Create/use Firestore; choose its location carefully.
-6.  Do NOT enable Firebase Storage.
-7.  Create Cloudinary Free account when Group 5 begins.
-8.  Create PayMongo test account/keys when Group 4 begins.
-9.  Connect the existing GitHub repo to Vercel in Group 8.
-10. Configure Capacitor/Android only after web deployment is stable.
+Customer features:
+- Register/login
+- Email/password authentication
+- Google authentication
+- Customer profile
+- Homepage
+- Latest coffee products
+- Buy Coffee
+- Product details
+- Small/Medium/Large sizes
+- Size-based prices
+- Sugar levels
+- Quantity
+- Cart
+- Checkout
+- Customer address/contact information
+- Order comments
+- COD
+- Online payment
+- My Orders
+- Real-time order status
 
-## Git
+Admin features:
+- Admin login/access
+- Dashboard
+- Product management
+- Add product
+- Edit product
+- Delete/deactivate product
+- Product availability
+- Product categories
+- Size prices
+- Sugar options
+- Product image management
+- Order management
+- Payment information
+- Customer management
+- Order status updates
 
-git clone https://github.com/XTiaaaaan/bistrobuddies.git cd
-bistrobuddies npm install ionic serve git checkout -b
-backup-before-ecommerce git push -u origin backup-before-ecommerce git
-checkout -b ecommerce-development git push -u origin
-ecommerce-development
+## TECHNOLOGY
 
-## Required first OpenCode prompt
+Existing:
+- Ionic Angular
+- Angular
+- TypeScript
+- Capacitor
 
-Read PROJECT_CONTEXT.md first. Inspect the existing repository
-completely, including package.json, src/app, routes, pages, services,
-assets, Firebase configuration, Capacitor configuration, environments,
-tests, and Git state. Do not modify anything. Explain what already works
-and the safest integration plan for the ecommerce requirements. Do not
-create/delete files, install dependencies, or recreate the project. Stop
-after inspection.
+Backend/services:
+- Firebase Authentication
+- Firebase Firestore
+- Cloudinary
+- Vercel server/API functions
+- PayMongo
 
-## Group 1 --- Firebase/Firestore foundation
+Android:
+- Capacitor
+- APK/AAB
 
-Manual: confirm Firebase web app already exists; enable Email/Password
-and Google; create/use Firestore; do not enable Storage.
+## FIREBASE
 
-Prompt: Read PROJECT_CONTEXT.md. Continue from the existing
-BistroBuddies repository. Implement Firebase initialization, Firestore
-services, TypeScript models, users/products/orders/payments structures,
-admin authorization foundation, timestamps, and initial Firestore
-security rules. Product model must include imageUrl and optional
-cloudinaryPublicId. DO NOT use or configure Firebase Storage. Do not
-implement Cloudinary, PayMongo, cart, checkout, or full admin UI.
-Preserve existing architecture. Build/test/fix. Report changes, tests,
-manual setup, issues, then stop.
+Use Firebase Authentication and Firestore.
 
-## Group 2 --- Auth/Home/Buy Coffee
+Authentication:
+- Email/password
+- Google
 
-Manual: verify Email/Password and Google providers. Test registration,
-login, Google login, logout, forgot password, and user profile creation.
+Firestore stores:
+- users
+- products
+- orders
+- payments
 
-Prompt: Read PROJECT_CONTEXT.md. Continue current state. Implement
-email/password auth, Google Firebase Auth, logout, forgot password, auth
-guards, user profile creation/update, and authenticated state. Turn the
-existing dashboard into the customer homepage. Show latest products from
-Firestore sorted by createdAt descending with loading/empty/error
-states. Rename List of Products to Buy Coffee. Show product cards with
-imageUrl, name, description, starting price, availability. Do not
-implement cart, checkout, PayMongo, Cloudinary upload, or admin UI.
-Build/test/fix and stop.
+Use Firebase server timestamps where appropriate.
 
-## Group 3 --- Product/Cart/Checkout
+## FIREBASE STORAGE
 
-Manual: ensure products exist in Firestore.
+DO NOT USE FIREBASE STORAGE.
 
-Prompt: Read PROJECT_CONTEXT.md. Implement product details,
-Small/Medium/Large selection, dynamic size pricing, sugar options,
-quantity, cart add/edit/remove/clear, checkout, saved customer
-information, editable checkout information, address, customer comment,
-subtotal, delivery fee, total, and COD/Online selection. Create secure
-order records with purchase-time product snapshots, customer/address
-snapshots, totals, payment method, statuses, timestamps. COD starts
-unpaid/pending; Online starts pending. Prevent duplicate submissions and
-client changes to trusted totals/orderStatus/paymentStatus/payment
-records. Do not integrate PayMongo or Cloudinary yet. Build/test/fix and
-stop.
+Do not:
+- install Firebase Storage
+- configure Firebase Storage
+- create a Firebase Storage bucket
+- upload product images to Firebase Storage
 
-## Group 4 --- PayMongo
+Product images use Cloudinary.
 
-Manual: create PayMongo test account. Never paste the secret into
-OpenCode chat. Keep it server-side.
+## USER MODEL
 
-Prompt: Read PROJECT_CONTEXT.md. Implement secure PayMongo integration
-using Vercel/server-side functions. Never expose PAYMONGO_SECRET_KEY to
-Angular/Ionic/browser/Capacitor/Firestore/GitHub. Implement server-side
-payment creation, payment records, status handling, secure/idempotent
-webhook processing, failure/cancel handling, duplicate prevention, and
-trusted order updates. Do not trust frontend payment-success flags. Keep
-COD working. Document exact environment variable names and webhook
-endpoint. Use test mode. Build/test/fix and stop.
+Users should contain information such as:
 
-## Group 5 --- Admin + Cloudinary
+- uid
+- name
+- email
+- phone
+- address
+- role
+- createdAt
+- updatedAt
 
-Manual: create Cloudinary Free account. It currently has no credit-card
-requirement and 25 monthly credits shared across storage, image
-bandwidth, and transformations. Keep API Secret private.
+Roles may include:
 
-Prompt: Read PROJECT_CONTEXT.md. Implement protected admin dashboard,
-product CRUD, availability, categories, prices, sugar options,
-Cloudinary product-image upload/preview/replacement, order management,
-customer management, payment visibility, and real-time customer order
-status. DO NOT use Firebase Storage. Product image flow must be Admin UI
--\> secure Vercel API -\> Cloudinary -\> image URL/public ID -\>
-Firestore. Keep Cloudinary API Secret server-side. Prefer
-signed/server-side uploads. Preserve historical order snapshots.
-Customers cannot change trusted order/payment fields. Build/test/fix and
-stop.
+- customer
+- admin
 
-## Group 6 --- Orders/Profile/Search
+Customers may edit only their own profile.
 
-Prompt: Read PROJECT_CONTEXT.md. Implement My Orders, order details,
-profile editing, saved addresses, default address, admin customer
-management, product/order search/filter/sort, and availability handling.
-Preserve historical purchase-time product information and prices.
-Build/test/fix and stop.
+## PRODUCT MODEL
 
-## Group 7 --- Polish/Security
+Products should contain:
 
-Prompt: Read PROJECT_CONTEXT.md. Polish responsive customer/admin UI and
-add loading/empty/error states. Audit Firebase Auth, Firestore rules,
-admin authorization, Vercel APIs, Cloudinary credentials/uploads,
-PayMongo secrets/webhooks, duplicate prevention, trusted totals,
-orderStatus/paymentStatus, and customer data isolation. Search the
-repository for secrets. Run build/tests/lint if available and fix
-errors. Stop.
+- id
+- name
+- description
+- category
+- imageUrl
+- cloudinaryPublicId
+- smallPrice
+- mediumPrice
+- largePrice
+- sugarOptions
+- available
+- createdAt
+- updatedAt
 
-## Group 8 --- Vercel/Capacitor/Release
+Do not hardcode product prices in the UI.
 
-Manual: connect the existing GitHub repo to Vercel; configure
-environment variables; use Secret type for private credentials; add the
-production Vercel domain to Firebase Auth authorized domains; configure
-PayMongo webhook; verify Cloudinary; inspect Capacitor before changing
-app ID; prepare Android debug APK/release APK/AAB; never commit
-keystores.
+## ORDER MODEL
 
-Prompt: Read PROJECT_CONTEXT.md. Perform final production integration
-and release preparation. Verify build, Vercel environment variables,
-Firebase authorized domains, Google login, Cloudinary production
-upload/delivery, PayMongo webhook, Capacitor app ID/name, Android
-sync/build, external payment redirect, mobile back button, keyboard,
-network errors, and end-to-end customer/admin flows. Prepare debug APK
-and release APK/AAB. Do not commit credentials or keystores. Fix
-release-blocking issues. Create concise deployment documentation and
-stop.
+Orders must preserve purchase-time snapshots.
 
-## Final test
+An order should contain:
 
-Customer: login -\> homepage -\> latest product -\> Buy Coffee -\>
-product -\> size -\> sugar -\> quantity -\> cart -\> checkout -\>
-comment -\> COD/Online -\> order -\> My Orders -\> status update.
+- id
+- customerId
+- customerSnapshot
+- addressSnapshot
+- items
+- subtotal
+- deliveryFee
+- total
+- customerComment
+- paymentMethod
+- paymentStatus
+- orderStatus
+- createdAt
+- updatedAt
 
-Admin: login -\> dashboard -\> products -\> Cloudinary image upload -\>
-orders -\> payment visibility -\> change status -\> customer sees
-real-time status.
+Each order item should preserve:
 
-Security: customer must not access admin data, another customer's order,
-product modification, orderStatus/paymentStatus/trusted total
-modification, payment confirmation, or self-admin escalation.
+- productId
+- productName
+- imageUrl
+- size
+- sugar
+- quantity
+- unitPrice
+- subtotal
 
-## Definition of done
+Historical orders must not depend on the current product record.
 
-Working customer ecommerce, Google/email auth, profiles, Buy Coffee,
-products, sizes, sugar, cart, checkout, comments, addresses, COD, secure
-PayMongo, payment records, orders/history, real-time status, admin
-dashboard, Cloudinary images, availability, order/customer/payment
-management, Firestore rules, Vercel deployment, Capacitor Android
-readiness, APK/AAB readiness, and end-to-end tests.
+## ORDER STATUS
 
-Firebase Storage must remain unused.
+Use:
+
+- PENDING
+- CONFIRMED
+- PREPARING
+- READY
+- COMPLETED
+- CANCELLED
+
+Customers should see status changes in real time.
+
+## PAYMENT STATUS
+
+Use:
+
+- PENDING
+- PAID
+- FAILED
+- REFUNDED
+
+Keep payment status separate from order status.
+
+## COD
+
+For COD orders:
+
+paymentMethod = COD
+
+paymentStatus initially = PENDING
+
+orderStatus initially = PENDING
+
+## ONLINE PAYMENT
+
+Online payments use PayMongo.
+
+IMPORTANT:
+
+The PayMongo secret key must NEVER be exposed to:
+
+- Angular
+- browser
+- Capacitor
+- Firestore
+- GitHub
+
+Use Vercel server/API functions.
+
+Never trust a frontend-only payment success result.
+
+Use server-side verification/webhooks where appropriate.
+
+Never hardcode payment credentials.
+
+## CLOUDINARY
+
+Cloudinary is used for product images.
+
+Architecture:
+
+Admin UI
+→ Vercel server/API
+→ Cloudinary
+→ image URL/public ID
+→ Firestore
+
+Cloudinary private credentials must remain server-side.
+
+Never put the Cloudinary secret in Angular code.
+
+## ADMIN SECURITY
+
+Admin access must be enforced through authentication/authorization and security rules.
+
+Do not rely only on hiding buttons.
+
+Customers must not be able to:
+
+- access admin pages/data
+- edit products
+- delete products
+- access other customers
+- access other customers' orders
+- change orderStatus
+- change paymentStatus
+- modify trusted totals
+- modify payment records
+- mark online payments as paid
+
+## CUSTOMER SECURITY
+
+A customer may access only their own private data.
+
+Products may be publicly readable to authenticated customers as appropriate.
+
+Orders must be restricted by customerId.
+
+## NAVIGATION
+
+The existing:
+
+"List of Products"
+
+should become:
+
+"Buy Coffee"
+
+Reuse the existing navigation and BistroBuddies branding.
+
+## DEVELOPMENT STYLE
+
+Prefer:
+- simple solutions
+- reusable services
+- reusable components
+- TypeScript interfaces/models
+- existing Ionic components
+- existing project structure
+
+Avoid:
+- unnecessary libraries
+- unnecessary refactoring
+- unnecessary framework upgrades
+- excessive animations
+- unrelated features
+
+Functionality is more important than cosmetic complexity.
+
+## TESTING
+
+After each development step:
+
+- build the application
+- run available tests
+- run lint if available
+- fix errors caused by the current step
+
+Do not claim something works unless it was verified.
+
+## DEVELOPMENT PROCESS
+
+Development is intentionally divided into small steps:
+
+1. Inspect project
+2. Firebase foundation
+3. Authentication
+4. Customer homepage
+5. Product details
+6. Cart
+7. Checkout/orders
+8. My Orders
+9. Admin products
+10. Admin orders
+11. Cloudinary
+12. PayMongo
+13. Profile
+14. Security
+15. UI cleanup
+16. Final testing
+17. Vercel
+18. Capacitor/APK/AAB
+
+Only implement the current requested step.
+
+Do not implement future steps unless explicitly requested.
+
+## IMPORTANT FOR OPENCODE
+
+Keep responses short.
+
+Do not repeatedly reread this file.
+
+Do not rewrite working code unnecessarily.
+
+Do not create a new project.
+
+Do not use Firebase Storage.
+
+Do not expose secrets.
+
+After completing the requested step:
+
+1. Build
+2. Test
+3. Fix relevant errors
+4. Give a short report
+5. Stop
