@@ -17,11 +17,16 @@ import {
   IonRouterOutlet,
   provideIonicAngular,
 } from '@ionic/angular';
+import { BehaviorSubject } from 'rxjs';
 
 import { AppComponent } from './app.component';
+import { AuthService } from './services/auth.service';
 
 describe('AppComponent', () => {
+  const authState$ = new BehaviorSubject(false);
+
   beforeEach(async () => {
+    authState$.next(false);
     await TestBed.configureTestingModule({
       imports: [
         AppComponent,
@@ -38,7 +43,17 @@ describe('AppComponent', () => {
         IonFooter,
         IonRouterOutlet,
       ],
-      providers: [provideRouter([]), provideIonicAngular()],
+      providers: [
+        provideRouter([]),
+        provideIonicAngular(),
+        {
+          provide: AuthService,
+          useValue: {
+            isAuthenticated$: authState$.asObservable(),
+            logout: vi.fn().mockResolvedValue(undefined),
+          },
+        },
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
@@ -59,6 +74,24 @@ describe('AppComponent', () => {
     expect(menuItems[1].innerHTML).toContain('List of Products');
     expect(menuItems[2].innerHTML).toContain('About the App');
     expect(menuItems[3].innerHTML).toContain('Developers');
+  });
+
+  it('should show the log in action when the customer is signed out', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const label = fixture.nativeElement.querySelector('.logout-bar span');
+    expect(label.textContent).toContain('Log In');
+  });
+
+  it('should switch to the log out action after the customer signs in', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+
+    authState$.next(true);
+    fixture.detectChanges();
+
+    const label = fixture.nativeElement.querySelector('.logout-bar span');
+    expect(label.textContent).toContain('Log Out');
   });
 
   it('should have urls', () => {
