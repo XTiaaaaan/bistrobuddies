@@ -14,7 +14,7 @@ import {
   ToastController,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { alertCircle, cafe } from 'ionicons/icons';
+import { alertCircle, cafe, cart } from 'ionicons/icons';
 import { Product, ProductSize } from '../../models/product.model';
 import { CartService } from '../../services/cart.service';
 import { ProductsService } from '../../services/products.service';
@@ -106,7 +106,7 @@ export class ProductDetailsPage implements OnInit {
   );
 
   constructor() {
-    addIcons({ alertCircle, cafe });
+    addIcons({ alertCircle, cafe, cart });
   }
 
   ngOnInit(): void {
@@ -171,7 +171,7 @@ export class ProductDetailsPage implements OnInit {
     this.cartService.add({
       productId: product.id,
       productName: product.name,
-      imageUrl: product.imageUrl ?? '',
+      productImage: product.imageUrl ?? '',
       size: this.selectedSize(),
       sugar: this.sugar(),
       quantity: this.quantity(),

@@ -149,7 +149,7 @@ describe('ProductDetailsPage', () => {
     expect(addSpy).toHaveBeenCalledWith({
       productId: 'p1',
       productName: 'House Latte',
-      imageUrl: 'https://example.com/latte.png',
+      productImage: 'https://example.com/latte.png',
       size: 'medium',
       sugar: 'Less Sugar',
       quantity: 2,

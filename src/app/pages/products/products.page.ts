@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
+  IonButton,
   IonButtons,
   IonContent,
   IonHeader,
@@ -9,7 +11,7 @@ import {
   IonToolbar,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { cafe } from 'ionicons/icons';
+import { cafe, cart } from 'ionicons/icons';
 import { ProductGridComponent } from '../../components/product-grid/product-grid.component';
 
 @Component({
@@ -18,6 +20,7 @@ import { ProductGridComponent } from '../../components/product-grid/product-grid
   styleUrls: ['./products.page.scss'],
   standalone: true,
   imports: [
+    IonButton,
     IonButtons,
     IonContent,
     IonHeader,
@@ -26,11 +29,12 @@ import { ProductGridComponent } from '../../components/product-grid/product-grid
     IonTitle,
     IonToolbar,
     ProductGridComponent,
+    RouterLink,
   ],
 })
 export class ProductsPage {
 
   constructor() {
-    addIcons({ cafe });
+    addIcons({ cafe, cart });
   }
 }

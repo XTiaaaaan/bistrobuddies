@@ -64,16 +64,17 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should have four menu pages', () => {
+  it('should have five menu pages', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const app = fixture.nativeElement;
     const menuItems = app.querySelectorAll('ion-label');
-    expect(menuItems.length).toEqual(4);
+    expect(menuItems.length).toEqual(5);
     expect(menuItems[0].innerHTML).toContain('Dashboard');
     expect(menuItems[1].innerHTML).toContain('Buy Coffee');
-    expect(menuItems[2].innerHTML).toContain('About the App');
-    expect(menuItems[3].innerHTML).toContain('Developers');
+    expect(menuItems[2].innerHTML).toContain('Cart');
+    expect(menuItems[3].innerHTML).toContain('About the App');
+    expect(menuItems[4].innerHTML).toContain('Developers');
   });
 
   it('should show the log in action when the customer is signed out', () => {
@@ -101,10 +102,11 @@ describe('AppComponent', () => {
     const links = fixture.debugElement
       .queryAll(By.directive(RouterLink))
       .map((el) => el.injector.get(RouterLink));
-    expect(links.length).toEqual(4);
+    expect(links.length).toEqual(5);
     expect(router.serializeUrl(links[0].urlTree!)).toEqual('/dashboard');
     expect(router.serializeUrl(links[1].urlTree!)).toEqual('/products');
-    expect(router.serializeUrl(links[2].urlTree!)).toEqual('/about');
-    expect(router.serializeUrl(links[3].urlTree!)).toEqual('/developers');
+    expect(router.serializeUrl(links[2].urlTree!)).toEqual('/cart');
+    expect(router.serializeUrl(links[3].urlTree!)).toEqual('/about');
+    expect(router.serializeUrl(links[4].urlTree!)).toEqual('/developers');
   });
 });

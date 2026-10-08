@@ -20,6 +20,8 @@ import {
   homeSharp,
   listOutline,
   listSharp,
+  cartOutline,
+  cartSharp,
   informationCircleOutline,
   informationCircleSharp,
   peopleOutline,
@@ -58,6 +60,7 @@ export class AppComponent implements OnInit {
   protected readonly appPages = [
     { title: 'Dashboard', url: '/dashboard', icon: 'home' },
     { title: 'Buy Coffee', url: '/products', icon: 'list' },
+    { title: 'Cart', url: '/cart', icon: 'cart' },
     { title: 'About the App', url: '/about', icon: 'information-circle' },
     { title: 'Developers', url: '/developers', icon: 'people' },
   ];
@@ -75,6 +78,8 @@ export class AppComponent implements OnInit {
       homeSharp,
       listOutline,
       listSharp,
+      cartOutline,
+      cartSharp,
       informationCircleOutline,
       informationCircleSharp,
       peopleOutline,
