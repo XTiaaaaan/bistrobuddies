@@ -37,6 +37,14 @@ export const routes: Routes = [
       import('./pages/products/products.page').then((m) => m.ProductsPage),
   },
   {
+    path: 'products/:id',
+    canMatch: [authGuard],
+    loadComponent: () =>
+      import('./pages/product-details/product-details.page').then(
+        (m) => m.ProductDetailsPage
+      ),
+  },
+  {
     path: 'about',
     loadComponent: () =>
       import('./pages/about/about.page').then((m) => m.AboutPage),

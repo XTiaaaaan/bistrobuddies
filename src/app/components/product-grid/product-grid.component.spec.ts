@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { Timestamp } from 'firebase/firestore';
 import { Observable, Subject, of } from 'rxjs';
 import { Product } from '../../models/product.model';
@@ -28,7 +29,10 @@ describe('ProductGridComponent', () => {
   function setup(watch: () => Observable<Product[]>): ComponentFixture<ProductGridComponent> {
     TestBed.configureTestingModule({
       imports: [ProductGridComponent],
-      providers: [{ provide: ProductsService, useValue: { watchProducts: vi.fn(watch) } }],
+      providers: [
+        provideRouter([]),
+        { provide: ProductsService, useValue: { watchProducts: vi.fn(watch) } },
+      ],
     });
     return TestBed.createComponent(ProductGridComponent);
   }

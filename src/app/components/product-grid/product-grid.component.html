@@ -19,7 +19,11 @@
 } @else {
   <div class="product-grid">
     @for (product of products(); track product.id) {
-      <article class="product-card">
+      <a
+        class="product-card"
+        [routerLink]="['/products', product.id]"
+        [attr.aria-label]="'View details for ' + product.name"
+      >
         <div class="product-media">
           @if (product.imageUrl) {
             <img [src]="product.imageUrl" [alt]="product.name" loading="lazy" />
@@ -39,7 +43,7 @@
             <span class="price">{{ startingPrice(product) }}</span>
           </div>
         </div>
-      </article>
+      </a>
     }
   </div>
 }
