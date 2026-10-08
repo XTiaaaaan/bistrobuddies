@@ -1,5 +1,6 @@
 import { Component, DestroyRef, OnInit, inject, input, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 import { IonButton, IonIcon, IonSpinner } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { alertCircle, cafe } from 'ionicons/icons';
@@ -13,7 +14,7 @@ export type ProductGridStatus = 'loading' | 'ready' | 'error';
   templateUrl: './product-grid.component.html',
   styleUrls: ['./product-grid.component.scss'],
   standalone: true,
-  imports: [IonButton, IonIcon, IonSpinner],
+  imports: [IonButton, IonIcon, IonSpinner, RouterLink],
 })
 export class ProductGridComponent implements OnInit {
   /** Only show products marked as available. */
