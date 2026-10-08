@@ -57,7 +57,7 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit {
   protected readonly appPages = [
     { title: 'Dashboard', url: '/dashboard', icon: 'home' },
-    { title: 'List of Products', url: '/products', icon: 'list' },
+    { title: 'Buy Coffee', url: '/products', icon: 'list' },
     { title: 'About the App', url: '/about', icon: 'information-circle' },
     { title: 'Developers', url: '/developers', icon: 'people' },
   ];
