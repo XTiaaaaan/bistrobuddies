@@ -57,6 +57,20 @@ export const routes: Routes = [
       import('./pages/checkout/checkout.page').then((m) => m.CheckoutPage),
   },
   {
+    path: 'my-orders',
+    canMatch: [authGuard],
+    loadComponent: () =>
+      import('./pages/my-orders/my-orders.page').then((m) => m.MyOrdersPage),
+  },
+  {
+    path: 'my-orders/:id',
+    canMatch: [authGuard],
+    loadComponent: () =>
+      import('./pages/order-details/order-details.page').then(
+        (m) => m.OrderDetailsPage
+      ),
+  },
+  {
     path: 'about',
     loadComponent: () =>
       import('./pages/about/about.page').then((m) => m.AboutPage),
