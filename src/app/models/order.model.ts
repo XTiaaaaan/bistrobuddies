@@ -33,8 +33,8 @@ export interface AddressSnapshot {
   recipientName: string;
   phone: string;
   address: string;
-  city: string;
-  postalCode: string;
+  city?: string;
+  postalCode?: string;
 }
 
 export interface Order {
