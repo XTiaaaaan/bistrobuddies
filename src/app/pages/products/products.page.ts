@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   IonButtons,
   IonContent,
@@ -10,6 +10,7 @@ import {
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { cafe } from 'ionicons/icons';
+import { ProductGridComponent } from '../../components/product-grid/product-grid.component';
 
 @Component({
   selector: 'app-products',
@@ -24,15 +25,12 @@ import { cafe } from 'ionicons/icons';
     IonMenuButton,
     IonTitle,
     IonToolbar,
+    ProductGridComponent,
   ],
 })
-export class ProductsPage implements OnInit {
+export class ProductsPage {
 
   constructor() {
     addIcons({ cafe });
   }
-
-  ngOnInit() {
-  }
-
 }

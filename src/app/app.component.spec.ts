@@ -71,7 +71,7 @@ describe('AppComponent', () => {
     const menuItems = app.querySelectorAll('ion-label');
     expect(menuItems.length).toEqual(4);
     expect(menuItems[0].innerHTML).toContain('Dashboard');
-    expect(menuItems[1].innerHTML).toContain('List of Products');
+    expect(menuItems[1].innerHTML).toContain('Buy Coffee');
     expect(menuItems[2].innerHTML).toContain('About the App');
     expect(menuItems[3].innerHTML).toContain('Developers');
   });
