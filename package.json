@@ -5,11 +5,14 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "lint": "ng lint"
+    "start": "ng serve app",
+    "build": "ng build app",
+    "watch": "ng build app --watch --configuration development",
+    "test": "ng test app",
+    "lint": "ng lint app && ng lint admin",
+    "start:admin": "ng serve admin",
+    "build:admin": "ng build admin",
+    "test:admin": "ng test admin"
   },
   "private": true,
   "dependencies": {
