@@ -261,6 +261,15 @@ $cream: #f5ede4;
   }
 }
 
+.checkout-button {
+  --border-radius: 16px;
+  --background: #3b2418;
+  --background-activated: #2c1a11;
+  --color: #ffffff;
+  font-weight: 700;
+  height: 50px;
+}
+
 .actions {
   display: flex;
   gap: 10px;

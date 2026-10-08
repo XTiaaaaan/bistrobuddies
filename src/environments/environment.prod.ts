@@ -1,5 +1,7 @@
 export const environment = {
   production: true,
+  /** Delivery fee in PHP. 0 means delivery is free / not configured. */
+  deliveryFee: 0,
   firebase: {
     apiKey: 'AIzaSyBETNFotntAk4HHIjDiO0Hf3a0_fTK8xBo',
     authDomain: 'bistrobuddies-4f179.firebaseapp.com',
