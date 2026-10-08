@@ -1,10 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router,
-  RouterLink,
-} from '@angular/router';
+import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import {
   IonApp,
   IonContent,
@@ -28,11 +24,15 @@ import {
   informationCircleSharp,
   peopleOutline,
   peopleSharp,
+  logInOutline,
+  logInSharp,
   logOutOutline,
   logOutSharp,
   chevronForwardOutline,
   chevronForwardSharp,
 } from 'ionicons/icons';
+
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -62,12 +62,14 @@ export class AppComponent implements OnInit {
     { title: 'Developers', url: '/developers', icon: 'people' },
   ];
 
-  selectedIndex = 0;
+  protected readonly selectedIndex = signal(0);
+  protected readonly signedIn = signal(false);
 
-  constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) {
+  private readonly router = inject(Router);
+  private readonly auth = inject(AuthService);
+  private readonly destroyRef = inject(DestroyRef);
+
+  constructor() {
     addIcons({
       homeOutline,
       homeSharp,
@@ -77,6 +79,8 @@ export class AppComponent implements OnInit {
       informationCircleSharp,
       peopleOutline,
       peopleSharp,
+      logInOutline,
+      logInSharp,
       logOutOutline,
       logOutSharp,
       chevronForwardOutline,
@@ -85,6 +89,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.auth.isAuthenticated$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((signedIn) => this.signedIn.set(signedIn));
+
     this.updateSelected(this.router.url);
 
     this.router.events.subscribe((event) => {
@@ -98,11 +106,20 @@ export class AppComponent implements OnInit {
     const index = this.appPages.findIndex((page) =>
       url.startsWith(page.url)
     );
-    this.selectedIndex = index >= 0 ? index : 0;
+    this.selectedIndex.set(index >= 0 ? index : 0);
   }
 
-  onLogout() {
-    // Placeholder logout handler — no auth logic wired up yet.
-    console.log('Log Out tapped');
+  async onLogout() {
+    if (!this.signedIn()) {
+      await this.router.navigate(['/login']);
+      return;
+    }
+
+    try {
+      await this.auth.logout();
+    } catch (error) {
+      console.error('Logout failed', error);
+    }
+    await this.router.navigate(['/login']);
   }
 }

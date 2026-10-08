@@ -24,7 +24,7 @@
         @for (p of appPages; track p.url; let i = $index) {
           <ion-menu-toggle auto-hide="false">
             <ion-item
-              [class.selected]="selectedIndex === i"
+              [class.selected]="selectedIndex() === i"
               routerDirection="root"
               [routerLink]="[p.url]"
               lines="none"
@@ -63,8 +63,12 @@
     <!-- Bottom Log Out Bar -->
     <ion-footer class="menu-footer">
       <div class="logout-bar" (click)="onLogout()">
-        <ion-icon aria-hidden="true" ios="log-out-outline" md="log-out-sharp"></ion-icon>
-        <span>Log Out</span>
+        <ion-icon
+          aria-hidden="true"
+          [ios]="signedIn() ? 'log-out-outline' : 'log-in-outline'"
+          [md]="signedIn() ? 'log-out-sharp' : 'log-in-sharp'"
+        ></ion-icon>
+        <span>{{ signedIn() ? 'Log Out' : 'Log In' }}</span>
       </div>
     </ion-footer>
   </ion-menu>
