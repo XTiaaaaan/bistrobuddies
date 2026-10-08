@@ -45,6 +45,12 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'cart',
+    canMatch: [authGuard],
+    loadComponent: () =>
+      import('./pages/cart/cart.page').then((m) => m.CartPage),
+  },
+  {
     path: 'about',
     loadComponent: () =>
       import('./pages/about/about.page').then((m) => m.AboutPage),

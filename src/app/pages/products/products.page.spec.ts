@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
 import { ProductsService } from '../../services/products.service';
 import { ProductsPage } from './products.page';
@@ -11,6 +12,7 @@ describe('ProductsPage', () => {
     await TestBed.configureTestingModule({
       imports: [ProductsPage],
       providers: [
+        provideRouter([]),
         {
           provide: ProductsService,
           useValue: { watchProducts: () => of([]) },
