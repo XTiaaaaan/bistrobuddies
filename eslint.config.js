@@ -25,6 +25,26 @@ module.exports = tseslint.config(
     },
   },
   {
+    files: ["projects/admin/**/*.ts"],
+    extends: [...angular.configs.tsRecommended],
+    processor: angular.processInlineTemplates,
+    rules: {
+      "@angular-eslint/prefer-standalone": "off",
+      "@angular-eslint/component-class-suffix": [
+        "error",
+        { suffixes: ["Page", "Component"] },
+      ],
+      "@angular-eslint/component-selector": [
+        "error",
+        { type: "element", prefix: "admin", style: "kebab-case" },
+      ],
+      "@angular-eslint/directive-selector": [
+        "error",
+        { type: "attribute", prefix: "admin", style: "camelCase" },
+      ],
+    },
+  },
+  {
     files: ["**/*.html"],
     extends: [...angular.configs.templateRecommended],
     rules: {},
